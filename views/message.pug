@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+  include ./partials/nav.pug 
+  h2= message.user 
+  p= message.text 
+  p=message.date 
+  button(class="delete" data-doc=`${message._id}`) Delete 
+
+  script.
+    const item = document.querySelector('button.delete');
+    item.addEventListener('click', (e) => {
+      const endpoint = `/message/${item.dataset.doc}`
+      fetch(endpoint, {
+        method: "DELETE"
+      })
+      .then(response => response.json())
+      .then(data => window.location.href = data.redirect)
+      .catch(err=> console.log(err))
+    })

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  include ./partials/nav.pug
+  h1= title
+  p Welcome to #{title}
+
+    each message in messages
+      h3=message.user 
+      p=message.text 
+      p=message.date
+      button: a(href=`/message/${message._id}`) View
