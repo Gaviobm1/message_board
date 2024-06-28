@@ -1,4 +1,6 @@
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -7,9 +9,8 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
-
 mongoose
-  .connect(DB_URI)
+  .connect(process.env.DB_URI)
   .then((response) => app.listen(8080))
   .catch((err) => console.log(err));
 
