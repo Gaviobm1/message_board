@@ -7,10 +7,9 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
-const connectStr = process.env.DB_URI;
 
 mongoose
-  .connect(connectStr)
+  .connect(DB_URI)
   .then((response) => app.listen(8080))
   .catch((err) => console.log(err));
 
